@@ -47,7 +47,7 @@ class Urls {
 }
 
 
-class Pokemon extends Urls {
+export default class Pokemon extends Urls {
 
   constructor(param){
     //Urls class에게 
@@ -65,7 +65,7 @@ class Pokemon extends Urls {
     const response = await fetch(name_url);
     const json = await response.json();
 
-    const name = json.names.find(({language} )=> language.name === "ko" ).name
+    const name = json.names.find(( {language} )=> language.name === "ko" ).name
     
     return name
   }
@@ -77,8 +77,8 @@ class Pokemon extends Urls {
 
     const type = await Promise.all(fetch_Data)
     .then((response)=> Promise.all(response.map((res)=>res.json())))
-    .then((result)=>result.map(({names})=>{
-      const name = names.find(({language})=> language.name === "ko").name
+    .then((result)=>result.map(( {names} )=>{
+      const name = names.find(( {language} )=> language.name === "ko").name
 
       return name
     }))
@@ -86,18 +86,3 @@ class Pokemon extends Urls {
     return type
   }
 }
-
-
-async function a(){
-  const pokemon = new Pokemon(1);
-  
-
-  console.log(pokemon);
-
-  
-
-
-}
-
-
-a();

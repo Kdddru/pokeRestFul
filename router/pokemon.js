@@ -5,14 +5,22 @@ const router = express.Router();
 
 
 router.get('/:id', async(req, res)=>{
-  const id = req.params.id
+  const param = req.params.id
   
-  const pokemon = new Pokemon(id);
+  const pokemon = new Pokemon(param);
+
+  const { name, type, basicInfo, ability } = pokemon;
+
+  const {id, weight, height} = await basicInfo
 
   
   const info = {
-    name : await pokemon.name,
-    type : await pokemon.type
+    id : id,
+    name : await name,
+    type : await type,
+    weight : weight,
+    height : height,
+    ability : await ability
   }
 
   res.send(info);
